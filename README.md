@@ -86,6 +86,7 @@ Telecom companies face significant challenges with customer churn, often losing 
     ```
 3. Run the application.
     ```bash
+    cd final-UI
     python app.py
     ```
 

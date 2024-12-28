@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #3c8dbc, #1d976c);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 20px;
+    }
+
+    .card {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .customer-item {
+      padding: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+    }
+
+    .customer-item:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .ai-response.active {
+      display: block;
+    }
+
+    .alert {
+      background-color: rgba(255, 255, 255, 0.4);
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+
+    .bar-chart-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .bar-chart {
+      width: 100%;
+      height: 300px; /* Ensures proper height for the graph */
+      max-width: 500px; /* Adjust for better scaling */
+      margin: 0 auto;
+    }
+    .ai-response {
+      display: none; /* Hide all recommendations by default */
+    }
+  
+    .ai-response.active {
+      display: block; /* Show only the active recommendation */
+    }
+  
+    .loading {
+      display: block; /* Show the loading message by default */
+      color: rgba(255, 255, 255, 0.7);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Left Column: Customer List -->
+    <div class="customer-list card">
+      <div class="card-header">
+        <i class="fas fa-exclamation-circle" style="color: red;"></i> At-Risk Customers
+      </div>
+      <div class="card-content">
+        <div class="customer-item" data-id="C1001">
+          <h3>John Smith</h3>
+          <p>ID: C1001</p>
+          <span class="badge">High</span>
+          <p>Top Issue: service outages 3 months</p>
+        </div>
+        <div class="customer-item" data-id="C1002">
+          <h3>Sarah Wilson</h3>
+          <p>ID: C1002</p>
+          <span class="badge">Moderate</span>
+          <p>Top Issue: missed payments 6 months</p>
+        </div>
+        <div class="customer-item" data-id="C1003">
+          <h3>Mike Johnson</h3>
+          <p>ID: C1003</p>
+          <span class="badge">High</span>
+          <p>Top Issue: call drops per month</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: AI Analysis and Recommendations -->
+    <div class="ai-analysis card">
+      <div class="bar-chart-container card">
+        <div class="card-header">
+          Customer Satisfaction Distribution
+        </div>
+        <div class="card-content" style="display: flex; justify-content: center; align-items: center; height: 300px;">
+          <svg class="bar-chart" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" style="max-width: 100%; height: auto;">
+            <!-- Y Axis -->
+            <g>
+              <text x="20" y="20" fill="#000" text-anchor="middle" transform="rotate(-90, 20, 150)">Number of Customers</text>
+              <line x1="50" y1="50" x2="50" y2="250" stroke="#000" />
+              <!-- Y-axis ticks and labels -->
+              <text x="30" y="150" text-anchor="end" font-size="10">50</text>
+              <text x="30" y="250" text-anchor="end" font-size="10">0</text>
+            </g>
+            
+            <!-- X Axis -->
+            <g>
+              <line x1="50" y1="250" x2="250" y2="250" stroke="#000" />
+              <text x="100" y="270" text-anchor="middle">Satisfied</text>
+              <text x="200" y="270" text-anchor="middle">Dissatisfied</text>
+            </g>
+    
+            <!-- Bars -->
+            <g>
+              <rect x="80" y="100" width="40" height="150" fill="#4f46e5"></rect>
+              <text x="100" y="95" text-anchor="middle" font-size="10">100</text>
+    
+              <rect x="180" y="150" width="40" height="100" fill="#dc2626"></rect>
+              <text x="200" y="145" text-anchor="middle" font-size="10">50</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="card-header">
+        <i class="fas fa-brain" style="color: blue;"></i> AI-Generated Recommendations
+      </div>
+      <div class="card-content">
+        <div class="ai-response" id="response-C1001">
+          <div class="alert">
+            <i class="fas fa-arrow-right-circle" style="color: blue;"></i>
+            <span class="alert-title">Recommendation</span>
+            <p class="alert-description">Schedule immediate network assessment</p>
+          </div>
+          <div class="alert">
+            <i class="fas fa-arrow-right-circle" style="color: blue;"></i>
+            <span class="alert-title">Recommendation</span>
+            <p class="alert-description">Provide service credits for downtime</p>
+          </div>
+          <div class="alert">
+            <i class="fas fa-arrow-right-circle" style="color: blue;"></i>
+            <span class="alert-title">Recommendation</span>
+            <p class="alert-description">Install network signal booster</p>
+          </div>
+        </div>
+
+        <div class="ai-response" id="response-C1002">
+          <div class="alert">
+            <i class="fas fa-arrow-right-circle" style="color: blue;"></i>
+            <span class="alert-title">Recommendation</span>
+            <p class="alert-description">Offer flexible payment plan</p>
+          </div>
+          <div class="alert">
+            <i class="fas fa-arrow-right-circle" style="color: blue;"></i>
+            <span class="alert-title">Recommendation</span>
+            <p class="alert-description">Set up automatic payments</p>
+          </div>
+          <div class="alert">
+            <i class="fas fa-arrow-right-circle" style="color: blue;"></i>
+            <span class="alert-title">Recommendation</span>
+            <p class="alert-description">Provide temporary payment relief</p>
+          </div>
+        </div>
+
+        <div class="ai-response" id="response-C1003">
+          <div class="alert">
+            <i class="fas fa-arrow-right-circle" style="color: blue;"></i>
+            <span class="alert-title">Recommendation</span>
+            <p class="alert-description">Technical review of coverage area</p>
+          </div>
+          <div class="alert">
+            <i class="fas fa-arrow-right-circle" style="color: blue;"></i>
+            <span class="alert-title">Recommendation</span>
+            <p class="alert-description">Offer WiFi calling features</p>
+          </div>
+          <div class="alert">
+            <i class="fas fa-arrow-right-circle" style="color: blue;"></i>
+            <span class="alert-title">Recommendation</span>
+            <p class="alert-description">Provide network extender device</p>
+          </div>
+        </div>
+
+        <div class="loading" id="loading">Select a customer to see AI recommendations</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const customerItems = document.querySelectorAll('.customer-item');
+      const aiResponses = document.querySelectorAll('.ai-response');
+      const loadingMessage = document.getElementById('loading');
+  
+      customerItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const customerId = item.dataset.id;
+  
+          // Hide all responses and show the loading message initially
+          aiResponses.forEach(response => response.classList.remove('active'));
+          loadingMessage.style.display = 'block';
+  
+          // After a brief delay (e.g., for simulating processing), show the selected response
+          setTimeout(() => {
+            loadingMessage.style.display = 'none';
+            const selectedResponse = document.getElementById(`response-${customerId}`);
+            if (selectedResponse) {
+              selectedResponse.classList.add('active');
+            }
+          }, 300); // Delay for effect (optional)
+        });
+      });
+    });
+  </script>
+  
+</body>
+</html>

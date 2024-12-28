@@ -78,7 +78,7 @@ Telecom companies face significant challenges with customer churn, often losing 
 ### Installation
 1. Clone the repository.
     ```bash
-    git clone https://github.com/shruthimohan/telecom-retention.git
+    git clone https://github.com/shruthimohan03/Predictive-Customer-Retention-A-Telecom-Solution.git
     ```
 2. Install dependencies.
     ```bash

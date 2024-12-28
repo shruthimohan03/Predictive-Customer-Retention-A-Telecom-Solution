@@ -80,11 +80,7 @@ Telecom companies face significant challenges with customer churn, often losing 
     ```bash
     git clone https://github.com/shruthimohan03/Predictive-Customer-Retention-A-Telecom-Solution.git
     ```
-2. Install dependencies.
-    ```bash
-    pip install -r requirements.txt
-    ```
-3. Run the application.
+2. Run the application.
     ```bash
     cd final-UI
     python app.py

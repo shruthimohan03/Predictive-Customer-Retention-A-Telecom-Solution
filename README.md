@@ -1,5 +1,9 @@
 # Predictive Customer Retention: A Telecom Solution
 
+
+https://github.com/user-attachments/assets/4eee5fb5-e994-427b-9729-555855d04c58
+
+
 ## Overview
 Telecom companies face significant challenges with customer churn, often losing subscribers due to dissatisfaction. This project aims to provide a novel solution for proactively identifying and addressing customer dissatisfaction using data-driven and AI-powered techniques.
 
@@ -30,7 +34,6 @@ Telecom companies face significant challenges with customer churn, often losing 
 ### 5. **Automated Actions**
 - AI-generated strategies are automatically integrated into the customer’s user interface.
 - The interface provides personalized recommendations and tailored solutions.
-![WhatsApp Image 2024-12-20 at 15 09 10_91af55f9](https://github.com/user-attachments/assets/22f47fdb-9e03-41c5-ae93-33ae24832708)
 ---
 
 ## Benefits
